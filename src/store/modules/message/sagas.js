@@ -5,9 +5,9 @@ import { createMessageFailer, createMessageSuccess } from './actions';
 
 export function* createMessage({ payload }) {
   try {
-    const { message } = payload.data;
+    const message = payload.data;
 
-    const response = yield call(api.post, 'messages/convert/sms', message);
+    const response = yield call(api.post, 'messages/convert/sms', { message });
 
     toast.success('Mensagem criada com sucesso!');
 
@@ -18,4 +18,6 @@ export function* createMessage({ payload }) {
   }
 }
 
-export default all([takeLatest('@user/UPDATE_MESSAGE_REQUEST', createMessage)]);
+export default all([
+  takeLatest('@message/CREATE_MESSAGE_REQUEST', createMessage),
+]);

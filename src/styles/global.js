@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
   @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
@@ -37,6 +38,26 @@ export default createGlobalStyle`
 
   button{
     cursor:pointer;
+  }
+
+  .Toastify__toast
+  {
+    border-radius:4px !important;
+  }
+
+  .Toastify__close-button{
+    margin-right:0;
+    margin-top:-5px;
+  }
+
+  .Toastify__toast--error
+  {
+    background:#BF253F !important;
+  }
+
+  .Toastify__toast--success
+  {
+    background:#28A869 !important;
   }
 
 `;
