@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdAdd } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 import { Container, Card, Title, RowForm, RowTable } from './styles';
 import api from '~/services/api';
 
 import { createMessageRequest } from '~/store/modules/message/actions';
 import { createNumberRequest } from '~/store/modules/number/actions';
 
-export default function Message() {
+export default function Dashboard() {
   const dispatch = useDispatch();
   const inputMessage = useSelector(state => state.message);
   const inputNumber = useSelector(state => state.number);
@@ -17,12 +19,42 @@ export default function Message() {
 
   async function loadMessages() {
     const response = await api.get('messages');
-    setMessages(response.data);
+
+    const data = response.data.map(message => {
+      const datetimeFormatted = format(
+        parseISO(message.createdAt),
+        "d 'de' MMMM, 'às' HH'h'",
+        {
+          locale: pt,
+        }
+      );
+      return {
+        ...message,
+        datetimeFormatted,
+      };
+    });
+
+    setMessages(data);
   }
 
   async function loadNumbers() {
     const response = await api.get('numbers');
-    setNumbers(response.data);
+
+    const data = response.data.map(number => {
+      const datetimeFormatted = format(
+        parseISO(number.createdAt),
+        "d 'de' MMMM, 'às' HH'h'",
+        {
+          locale: pt,
+        }
+      );
+      return {
+        ...number,
+        datetimeFormatted,
+      };
+    });
+
+    setNumbers(data);
   }
 
   function handleSubmitMessage({ message }, { resetForm }) {
@@ -83,7 +115,7 @@ export default function Message() {
                     <td>{message.user}</td>
                     <td>{message.content}</td>
                     <td>{message.numbers}</td>
-                    <td>{message.createdAt}</td>
+                    <td>{message.datetimeFormatted}</td>
                   </tr>
                 ))
               )}
@@ -91,7 +123,7 @@ export default function Message() {
           </table>
         </RowTable>
       </Card>
-      <Title>Lista de números SMS ({messages.length})</Title>
+      <Title>Lista de números SMS ({numbers.length})</Title>
       <Card>
         <RowForm>
           <Form onSubmit={handleSubmitNumber}>
@@ -129,7 +161,7 @@ export default function Message() {
                     <td>{number.user}</td>
                     <td>{number.content}</td>
                     <td>{number.message}</td>
-                    <td>{number.createdAt}</td>
+                    <td>{number.datetimeFormatted}</td>
                   </tr>
                 ))
               )}

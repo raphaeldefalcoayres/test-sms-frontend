@@ -9,7 +9,7 @@ export function* createMessage({ payload }) {
 
     const response = yield call(api.post, 'messages/convert/sms', { message });
 
-    toast.success('Mensagem criada com sucesso!');
+    toast.success('Mensagem cadastrada com sucesso!');
 
     yield put(createMessageSuccess(response.data));
   } catch (error) {

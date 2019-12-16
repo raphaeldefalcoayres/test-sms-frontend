@@ -1,12 +1,12 @@
 import React from 'react';
 import { Switch } from 'react-router-dom';
 import Route from './Route';
-import Message from '../pages/Message';
+import Dashboard from '../pages/Dashboard';
 
 export default function Routes() {
   return (
     <Switch>
-      <Route path="/" exact component={Message} />
+      <Route path="/" exact component={Dashboard} />
 
       <Route path="/" component={() => <h1>404</h1>} />
     </Switch>
