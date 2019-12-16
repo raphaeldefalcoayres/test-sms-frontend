@@ -8,7 +8,6 @@ Frontend using reactjs and redux to manage SMS messages
   <a href="#overview">Overview</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#getting-started">Getting Started</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#installing">Installing</a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#docs">Docs</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#built-with">Built With</a>&nbsp;&nbsp;|&nbsp;&nbsp;
   <a href="#license">License</a>
 </p>
